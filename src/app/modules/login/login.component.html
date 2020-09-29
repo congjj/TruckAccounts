@@ -3,14 +3,14 @@
   <h2>我的测试系统</h2>
   <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your username!">
+      <nz-form-control nzErrorTip="输入用户名">
         <nz-input-group nzPrefixIcon="user">
           <input type="text" nz-input formControlName="userName" placeholder="Username"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your Password!">
+      <nz-form-control nzErrorTip="请输入密码">
         <nz-input-group nzPrefixIcon="lock">
           <input type="password" nz-input formControlName="password" placeholder="Password"/>
         </nz-input-group>
