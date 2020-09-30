@@ -2,22 +2,26 @@
   <nz-sider nzCollapsible  [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-submenu nzTitle="User" nzIcon="user">
+      <li #baseOp (click)="baseOperationClick($event,baseOp)" nz-submenu nzTitle="基础维护" nzIcon="setting">
         <ul>
-          <li nz-menu-item>Tom</li>
-          <li nz-menu-item>Bill</li>
-          <li nz-menu-item>Alex</li>
+          <li nz-menu-item (click)="baseOperationClick($event,baseOp)" >登录账号</li>
+          <li nz-menu-item (click)="baseOperationClick($event,baseOp)">货车司机</li>
+          <li nz-menu-item (click)="baseOperationClick($event,baseOp)">承运商</li>
+          <li nz-menu-item (click)="baseOperationClick($event,baseOp)">货车信息</li>
+          <li nz-menu-item (click)="baseOperationClick($event,baseOp)">记账项目</li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Team" nzIcon="team">
+      <li #accountOp (click)="baseOperationClick($event,accountOp)" nz-submenu nzTitle="记账" nzIcon="form">
         <ul>
           <li nz-menu-item>Team 1</li>
           <li nz-menu-item>Team 2</li>
         </ul>
       </li>
-      <li nz-menu-item>
-        <i nz-icon nzType="file"></i>
-        <span>File</span>
+      <li #reportOp (click)="baseOperationClick($event,reportOp)" nz-submenu nzTitle="账表" nzIcon="bar-chart">
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+        </ul>
       </li>
     </ul>
   </nz-sider>
@@ -26,9 +30,8 @@
       <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
     </nz-header>
     <nz-content>
-      <nz-breadcrumb>
-        <nz-breadcrumb-item>User</nz-breadcrumb-item>
-        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+      <nz-breadcrumb [nzAutoGenerate]="true" >
+        <nz-breadcrumb-item *ngFor="let item of breadcrumbitem">{{item}}</nz-breadcrumb-item>
       </nz-breadcrumb>
       <div class="inner-content">
         Bill is a cat.

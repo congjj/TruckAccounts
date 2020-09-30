@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import {NzBreadCrumbModule, NzIconModule, NzLayoutModule, NzMenuModule} from 'ng-zorro-antd';
-
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -14,7 +14,8 @@ import {NzBreadCrumbModule, NzIconModule, NzLayoutModule, NzMenuModule} from 'ng
     NzLayoutModule,
     NzBreadCrumbModule,
     NzIconModule,
-    NzMenuModule
+    NzMenuModule,
+    FormsModule
   ]
 })
 export class HomeModule { }
