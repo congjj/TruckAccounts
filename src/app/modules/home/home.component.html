@@ -1,14 +1,14 @@
 <nz-layout class="fill-screen">
-  <nz-sider nzCollapsible  [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li #baseOp (click)="baseOperationClick($event,baseOp)" nz-submenu nzTitle="基础维护" nzIcon="setting">
         <ul>
-          <li nz-menu-item (click)="baseOperationClick($event,baseOp)" >登录账号</li>
-          <li nz-menu-item (click)="baseOperationClick($event,baseOp)">货车司机</li>
-          <li nz-menu-item (click)="baseOperationClick($event,baseOp)">承运商</li>
-          <li nz-menu-item (click)="baseOperationClick($event,baseOp)">货车信息</li>
-          <li nz-menu-item (click)="baseOperationClick($event,baseOp)">记账项目</li>
+          <li id="register" nz-menu-item (click)="baseOperationClick($event,baseOp)">登录账号</li>
+          <li id="driver" nz-menu-item (click)="baseOperationClick($event,baseOp)">货车司机</li>
+          <li id="custom" nz-menu-item (click)="baseOperationClick($event,baseOp)">客户信息</li>
+          <li id="truck" nz-menu-item (click)="baseOperationClick($event,baseOp)">货车信息</li>
+          <li id="item" nz-menu-item (click)="baseOperationClick($event,baseOp)">记账项目</li>
         </ul>
       </li>
       <li #accountOp (click)="baseOperationClick($event,accountOp)" nz-submenu nzTitle="记账" nzIcon="form">
@@ -27,14 +27,16 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
+      <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+         (click)="isCollapsed = !isCollapsed"></i>
+      <span class="user-right">{{loginUser}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
     </nz-header>
     <nz-content>
-      <nz-breadcrumb [nzAutoGenerate]="true" >
+      <nz-breadcrumb [nzAutoGenerate]="true">
         <nz-breadcrumb-item *ngFor="let item of breadcrumbitem">{{item}}</nz-breadcrumb-item>
       </nz-breadcrumb>
       <div class="inner-content">
-        Bill is a cat.
+        <router-outlet></router-outlet>
       </div>
     </nz-content>
     <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>

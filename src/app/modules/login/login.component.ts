@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router, NavigationExtras} from '@angular/router';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {GlobalConfig} from '../../services/global.config';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +14,18 @@ export class LoginComponent implements OnInit
 
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, public router: Router)
+  constructor(private fb: FormBuilder, public router: Router, public  httpClient: HttpClient)
   {
   }
 
   ngOnInit(): void
   {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
+      userId: [null, [Validators.required]],
       password: [null, [Validators.required]],
       remember: [true]
     });
+
   }
 
   submitForm(): void
@@ -32,17 +35,41 @@ export class LoginComponent implements OnInit
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    console.log(this.validateForm.value);
-    console.log(this.validateForm.value.userName);
+
     let parm: NavigationExtras = {
       queryParams: {
-        userName: this.validateForm.value.userName,
-        passWord: this.validateForm.value.password,
+        userId: this.validateForm.value.userId,
+        password: this.validateForm.value.password,
       }
     };
 
-    // 验证成功后登陆
-    this.router.navigate(['/account'], parm);
+    console.log(parm);
+    if (parm.queryParams.userId == null || parm.queryParams.password == null || parm.queryParams.userId.trim().length == 0 || parm.queryParams.password.trim().length == 0)
+    {
+      alert('输入用户名或密码！');
+      return;
+    }
+
+    const url: string = GlobalConfig.url + 'user/userLogin';
+    let bodys =parm.queryParams;
+
+    const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+    this.httpClient.post(url, bodys, httpOptions).subscribe((data: any) =>
+    {
+      console.log(data);
+      if (data.code == 200)
+      {
+        GlobalConfig.loginInfo.id=  data.data.id;
+        GlobalConfig.loginInfo.username=data.data.name;
+        GlobalConfig.loginInfo.password=data.data.password;
+        this.router.navigate(['/account']);
+      } else
+      {
+        alert(data.msg);
+      }
+    });
 
   }
+
+
 }

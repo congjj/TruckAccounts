@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import {NzBreadCrumbModule, NzIconModule, NzLayoutModule, NzMenuModule} from 'ng-zorro-antd';
+import {NzBreadCrumbModule, NzIconModule, NzLayoutModule, NzMenuModule, NzTableModule} from 'ng-zorro-antd';
 import {FormsModule} from '@angular/forms';
+import {RegisterComponent} from '../../components/users/register/register.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent,RegisterComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -15,7 +16,9 @@ import {FormsModule} from '@angular/forms';
     NzBreadCrumbModule,
     NzIconModule,
     NzMenuModule,
-    FormsModule
-  ]
+    FormsModule,
+    NzTableModule
+  ],
+  providers:[]
 })
 export class HomeModule { }

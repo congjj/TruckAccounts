@@ -16,6 +16,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     NzInputModule,
     ReactiveFormsModule,
     NzButtonModule
-  ]
+  ],
+  providers:[]
 })
 export class LoginModule { }

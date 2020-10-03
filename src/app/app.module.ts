@@ -11,11 +11,17 @@ import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 
+
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // RegisterComponent,
+    // DriverComponent,
+    // CustomComponent,
+    // TruckComponent,
+    // AccountItemComponent
   ],
   imports: [
     BrowserModule,
