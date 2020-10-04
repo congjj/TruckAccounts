@@ -12,7 +12,8 @@ import {GlobalConfig} from '../../services/global.config';
 export class LoginComponent implements OnInit
 {
 
-  validateForm!: FormGroup;
+  validateForm: FormGroup;
+  loading =false;
 
   constructor(private fb: FormBuilder, public router: Router, public  httpClient: HttpClient)
   {
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit
 
   submitForm(): void
   {
+    this.loading = true;
     for (const i in this.validateForm.controls)
     {
       this.validateForm.controls[i].markAsDirty();
@@ -43,7 +45,7 @@ export class LoginComponent implements OnInit
       }
     };
 
-    console.log(parm);
+    //console.log(parm);
     if (parm.queryParams.userId == null || parm.queryParams.password == null || parm.queryParams.userId.trim().length == 0 || parm.queryParams.password.trim().length == 0)
     {
       alert('输入用户名或密码！');
@@ -52,11 +54,9 @@ export class LoginComponent implements OnInit
 
     const url: string = GlobalConfig.url + 'user/userLogin';
     let bodys =parm.queryParams;
-
-    const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
-    this.httpClient.post(url, bodys, httpOptions).subscribe((data: any) =>
+    this.httpClient.post(url, bodys, GlobalConfig.HttpOptions).subscribe((data: any) =>
     {
-      console.log(data);
+      //console.log(data);
       if (data.code == 200)
       {
         GlobalConfig.loginInfo.id=  data.data.id;
@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit
       {
         alert(data.msg);
       }
+      this.loading =false;
     });
 
   }

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit
 
   ngOnInit(): void
   {
-    console.log(GlobalConfig.loginInfo);
+    //console.log(GlobalConfig.loginInfo);
     if (GlobalConfig.loginInfo.username ==null || GlobalConfig.loginInfo .username .trim().length==0)
     {
       this.router.navigate(['/login']);

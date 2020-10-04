@@ -1,18 +1,20 @@
 <h4>用户信息</h4>
-<nz-table #middleTable nzSize="middle" [nzData]="data">
+
+<nz-table [nzLoading]="loading" #middleTable nzSize="middle" [nzData]="data">
   <thead>
   <tr>
-    <th>用户名</th>
-    <th>密 码</th>
+    <th>登录账号</th>
+    <th>用户姓名</th>
     <th>是否有效</th>
+    <th><button nz-button [nzType]="'primary'" nzShape="round" (click)="addUser()"><i nz-icon nzType="plus"></i></button></th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of middleTable.data">
-    <td>{{ data.name }}</td>
-    <td>{{ data.age }}</td>
-    <td>{{ data.address }}</td>
+  <tr *ngFor="let item of middleTable.data">
+    <td>{{ item.id }}</td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.state}}</td>
+    <td><button nz-button [nzType]="'primary'" nzShape="round" (click)="editUser(item)"><i nz-icon nzType="edit"></i></button></td>
   </tr>
   </tbody>
 </nz-table>
-
