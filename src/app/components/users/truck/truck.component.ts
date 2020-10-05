@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./truck.component.less']
 })
 export class TruckComponent implements OnInit {
+  tabs = [1, 2, 3];
 
   constructor() { }
 

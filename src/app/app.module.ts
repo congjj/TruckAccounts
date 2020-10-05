@@ -17,11 +17,6 @@ registerLocaleData(zh);
 @NgModule({
   declarations: [
     AppComponent,
-    // RegisterComponent,
-    // DriverComponent,
-    // CustomComponent,
-    // TruckComponent,
-    // AccountItemComponent
   ],
   imports: [
     BrowserModule,

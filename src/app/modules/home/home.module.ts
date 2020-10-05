@@ -13,16 +13,18 @@ import {
   NzInputModule,
   NzLayoutModule,
   NzMenuModule, NzSelectModule,
-  NzTableModule
+  NzTableModule, NzTabsModule
 } from 'ng-zorro-antd';
 
 import {RegisterModule} from '../../components/users/register/register.module';
 import { NzDrawerModule } from 'ng-zorro-antd';
 import {FormsModule} from '@angular/forms';
 import {RegisterComponent} from '../../components/users/register/register.component';
+import {TruckComponent} from '../../components/users/truck/truck.component';
+import {TruckAccountComponent} from '../../components/accounts/truck-account/truck-account.component';
 
 @NgModule({
-  declarations: [HomeComponent,RegisterComponent],
+  declarations: [HomeComponent,RegisterComponent,TruckComponent,TruckAccountComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -38,7 +40,8 @@ import {RegisterComponent} from '../../components/users/register/register.compon
     NzDatePickerModule,
     NzSelectModule,
     NzDrawerModule,
-    RegisterModule
+    RegisterModule,
+    NzTabsModule
   ],
   providers:[]
 })

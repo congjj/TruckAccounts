@@ -6,6 +6,7 @@ import {CustomComponent} from '../../components/users/custom/custom.component';
 import {DriverComponent} from '../../components/users/driver/driver.component';
 import {TruckComponent} from '../../components/users/truck/truck.component';
 import {AccountItemComponent} from '../../components/users/account-item/account-item.component';
+import {TruckAccountComponent} from '../../components/accounts/truck-account/truck-account.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
       {path: 'custom', component: CustomComponent},
       {path: 'driver', component: DriverComponent},
       {path: 'truck', component: TruckComponent},
-      {path: 'item', component: AccountItemComponent}]
+      {path: 'item', component: AccountItemComponent},
+      {path: 'account', component: TruckAccountComponent}]
   },
   {
     path: 'item', component: AccountItemComponent

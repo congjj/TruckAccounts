@@ -13,7 +13,7 @@
       </li>
       <li #accountOp (click)="baseOperationClick($event,accountOp)" nz-submenu nzTitle="记账" nzIcon="account-book">
         <ul>
-          <li nz-menu-item>Team 1</li>
+          <li id="account" nz-menu-item (click)="baseOperationClick($event,baseOp)">费用入账</li>
           <li nz-menu-item>Team 2</li>
         </ul>
       </li>
