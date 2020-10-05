@@ -12,7 +12,7 @@ import {
   NzSpinModule
 } from 'ng-zorro-antd';
 import {NzModalService} from 'ng-zorro-antd';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [EditComponent],
@@ -27,6 +27,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     NzSpinModule,
     NzButtonModule,
     NzFormModule,
+    FormsModule,
   ],
   providers:[NzModalService]
 })

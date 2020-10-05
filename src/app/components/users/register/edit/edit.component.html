@@ -1,10 +1,17 @@
+<nz-form-item *ngIf="opts.operType=='edit'">
+  <nz-form-control  nzSpan="30">
+    <label>登录账号
+      <input type="text"  nz-input  [ngModel]="value" [disabled]="true"/>
+    </label>
+  </nz-form-control>
+</nz-form-item>
+
 <form nz-form [formGroup]="formGroup" (ngSubmit)="submit()">
   <nz-spin [nzSpinning]="loading">
-
-    <nz-form-item>
+    <nz-form-item *ngIf="opts.operType=='add'">
       <nz-form-control nzErrorTip="登录账号必须填写" nzHasFeedback nzSpan="30">
         <label>登录账号
-          <input type="text" [disabled]="opts.operType=='add'" nz-input formControlName="id"/>
+          <input type="text"  nz-input formControlName="id"/>
         </label>
       </nz-form-control>
     </nz-form-item>
@@ -16,7 +23,7 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item *ngIf="opts.operType=='edit'">
-      <nz-form-control nzErrorTip="原密码必须填写" nzHasFeedback nzSpan="30">
+      <nz-form-control nzSpan="30">
         <label>原密码
           <input type="password" nz-input formControlName="oldPassword"/>
         </label>

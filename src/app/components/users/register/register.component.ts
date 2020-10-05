@@ -14,7 +14,7 @@ import {NzModalService} from 'ng-zorro-antd';
 export class RegisterComponent implements OnInit
 {
   opts: {
-    operType: "add" | "edit"; // 'add' 'edit'
+    operType: 'add' | 'edit'; // 'add' 'edit'
     editId: string; // 要进行编辑的数据的Id
   };
   data: any = [];
@@ -30,9 +30,34 @@ export class RegisterComponent implements OnInit
     this.reloadUsers();
   }
 
-  editUser(name: string)
+  editUser(user: any)
   {
-    console.log(name);
+    const modal = this.modalService.create({
+      nzTitle: '用户修改', // 窗体标题
+      nzContent: EditComponent, // 表单组件
+      // 要传递给表单组件的参数
+      nzComponentParams: {
+        opts: {
+          operType: 'edit',
+          editInfo: user,
+        },
+      },
+      nzWidth: 400, // 窗体宽度
+      nzClosable: false, // 不显示右上角的X按钮
+      nzMaskClosable: false, // 不允许点击窗体旁边的空白处关闭
+      nzFooter: null, // 不显示自带的底部按钮栏，因为表单组件自己会添加底部按钮栏
+      nzOnOk: (a: any) =>
+      {
+      },
+    });
+    modal.afterClose.asObservable().subscribe(rdata =>
+    {
+      if (rdata != undefined && rdata.type == 'ok')
+      {
+        this.reloadUsers();
+      }
+    });
+
   }
 
   addUser()
@@ -43,7 +68,7 @@ export class RegisterComponent implements OnInit
       // 要传递给表单组件的参数
       nzComponentParams: {
         opts: {
-          operType: "add",
+          operType: 'add',
           editInfo: null,
         },
       },
@@ -51,7 +76,9 @@ export class RegisterComponent implements OnInit
       nzClosable: false, // 不显示右上角的X按钮
       nzMaskClosable: false, // 不允许点击窗体旁边的空白处关闭
       nzFooter: null, // 不显示自带的底部按钮栏，因为表单组件自己会添加底部按钮栏
-      nzOnOk:(a:any)=> {},
+      nzOnOk: (a: any) =>
+      {
+      },
     });
     modal.afterClose.asObservable().subscribe(rdata =>
     {
