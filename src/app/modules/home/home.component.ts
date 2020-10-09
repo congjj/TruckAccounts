@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit
 
   baseOperationClick(e, baseOp: NzSubMenuComponent)
   {
-    console.log(e.toElement);
+    //console.log(e.toElement);
     let isUpdate:Boolean= this.setBreadHeadItem(e, baseOp);
     if (isUpdate)
     {

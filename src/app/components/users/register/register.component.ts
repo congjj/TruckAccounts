@@ -57,7 +57,6 @@ export class RegisterComponent implements OnInit
         this.reloadUsers();
       }
     });
-
   }
 
   addUser()

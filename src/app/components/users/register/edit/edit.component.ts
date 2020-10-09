@@ -114,7 +114,7 @@ export class EditComponent implements OnInit
         userId: this.formGroup.value.id,
         password: this.formGroup.value.oldPassword,
       };
-      console.log(bodys);
+      //console.log(bodys);
       this.httpClient.post(url, bodys, GlobalConfig.HttpOptions).subscribe((data: any) =>
       {
         if (data.code == 200)
