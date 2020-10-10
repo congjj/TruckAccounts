@@ -1,13 +1,22 @@
 
 <form nz-form [formGroup]="formGroup" (ngSubmit)="submit()">
   <nz-spin [nzSpinning]="loading">
-    <nz-form-item *ngIf="opts.operType=='add'">
-      <nz-form-control nzErrorTip="登录账号必须填写" nzHasFeedback nzSpan="30">
-        <label>登录账号
-          <input type="text"  nz-input formControlName="id"/>
+
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="费用发生日期" nzHasFeedback nzSpan="30">
+        <label>费用发生日期
+          <nz-date-picker type="date" class="nc-date-full-width" formControlName="accountDate"></nz-date-picker>
         </label>
       </nz-form-control>
     </nz-form-item>
+
+
+    <nz-select [(ngModel)]="selectedValue"  (ngModelChange)="subjectChange($event)" nzAllowClear nzPlaceHolder="选择发生费用">
+      <nz-option *ngFor="let option of subjectList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+    </nz-select>
+
+
     <nz-form-item>
       <nz-form-control nzErrorTip="用户姓名必须填写" nzHasFeedback nzSpan="30">
         <label>用户姓名

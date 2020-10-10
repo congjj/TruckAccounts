@@ -14,12 +14,16 @@ export class EditComponent implements OnInit
   loading = false;
 
   opts: {
-    operType:'add' | 'edit'; // 'add' 'edit'
+    operType: 'add' | 'edit'; // 'add' 'edit'
     args: {}
   };
   value: any;
   formGroup: any;
   submitting = false;
+  subjectList: any[] = [{label: 'Lucy', value: 'lucy', age: 20},
+    {label: 'Jack', value: 'jack', age: 22}];
+  selectedValue = {label: 'Jack', value: 'jack', age: 22};
+
 
   constructor(private formBuilder: FormBuilder, private modal: NzModalRef, public router: Router, public  httpClient: HttpClient)
   {
@@ -28,7 +32,7 @@ export class EditComponent implements OnInit
   ngOnInit(): void
   {
     this.formGroup = this.formBuilder.group({
-      id: ['', [Validators.required]],
+      accountDate: [new Date(), [Validators.required]],
       name: ['', [Validators.required]],
       password: ['', [Validators.required]],
       password1: ['', [Validators.required]],
@@ -43,6 +47,11 @@ export class EditComponent implements OnInit
   }
 
   cancel()
+  {
+
+  }
+
+  subjectChange(e: any)
   {
 
   }

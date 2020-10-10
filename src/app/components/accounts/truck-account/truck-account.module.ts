@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditComponent } from './edit/edit.component';
-import {NzButtonModule, NzFormModule, NzGridModule, NzInputModule, NzSpinModule} from 'ng-zorro-antd';
+import {NzButtonModule, NzDatePickerModule, NzFormModule, NzGridModule, NzInputModule, NzSelectModule, NzSpinModule} from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
@@ -16,7 +16,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     NzSpinModule,
     NzButtonModule,
     NzInputModule,
-    NzFormModule
+    NzFormModule,
+    NzDatePickerModule,
+    NzSelectModule
   ]
 })
 export class TruckAccountModule { }

@@ -140,7 +140,7 @@ export class TruckAccountComponent implements OnInit
           },
         },
       },
-      nzWidth: 400, // 窗体宽度
+      nzWidth: 800, // 窗体宽度
       nzClosable: false, // 不显示右上角的X按钮
       nzMaskClosable: false, // 不允许点击窗体旁边的空白处关闭
       nzFooter: null, // 不显示自带的底部按钮栏，因为表单组件自己会添加底部按钮栏
