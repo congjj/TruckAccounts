@@ -1,58 +1,80 @@
-
 <form nz-form [formGroup]="formGroup" (ngSubmit)="submit()">
   <nz-spin [nzSpinning]="loading">
 
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="费用发生日期" nzHasFeedback nzSpan="20">
+            <label>费用发生日期
+              <nz-date-picker class="nc-date-full-width" formControlName="accountDate"></nz-date-picker>
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="选择费用醒目" nzHasFeedback nzSpan="20">
+            <label>费用项目
+              <nz-select nzShowSearch formControlName="subjectValue" [(ngModel)]="subjectValue"
+                         (ngModelChange)="subjectChange($event)" nzAllowClear
+                         nzPlaceHolder="选择发生费用">
+                <nz-option *ngFor="let option of subjectList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+              </nz-select>
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
 
-    <nz-form-item>
-      <nz-form-control nzErrorTip="费用发生日期" nzHasFeedback nzSpan="30">
-        <label>费用发生日期
-          <nz-date-picker type="date" class="nc-date-full-width" formControlName="accountDate"></nz-date-picker>
-        </label>
-      </nz-form-control>
-    </nz-form-item>
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="单价必须填写" nzHasFeedback nzSpan="20">
+            <label>单价
+              <input type="text" nz-input formControlName="price"/>
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="数量必须填写" nzHasFeedback nzSpan="20">
+            <label>数量
+              <input type="text" nz-input formControlName="count"/>
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
 
+    <div nz-row>
+      <div nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-control nzHasFeedback nzSpan="20">
+            <label>费用项目
+              <nz-select nzShowSearch formControlName="customValue" [(ngModel)]="customValue"
+                         (ngModelChange)="subjectChange($event)" nzAllowClear
+                         nzPlaceHolder="选择客户">
+                <nz-option *ngFor="let option of subjectList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+              </nz-select>
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
 
-    <nz-select [(ngModel)]="selectedValue"  (ngModelChange)="subjectChange($event)" nzAllowClear nzPlaceHolder="选择发生费用">
-      <nz-option *ngFor="let option of subjectList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
-    </nz-select>
+    <div nz-row>
+      <div nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-control nzHasFeedback nzSpan="20">
+            <label>备注
+              <textarea nz-input formControlName="remarkValue"></textarea>
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
 
-
-    <nz-form-item>
-      <nz-form-control nzErrorTip="用户姓名必须填写" nzHasFeedback nzSpan="30">
-        <label>用户姓名
-          <input type="text" nz-input formControlName="name"/>
-        </label>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item *ngIf="opts.operType=='edit'">
-      <nz-form-control nzSpan="30">
-        <label>原密码
-          <input type="password" nz-input formControlName="oldPassword"/>
-        </label>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control nzErrorTip="密码必须填写" nzHasFeedback nzSpan="30">
-        <label>密码
-          <input type="password" nz-input formControlName="password"/>
-        </label>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control nzErrorTip="确认密码必须填写" nzHasFeedback nzSpan="30">
-        <label>密码确认
-          <input type="password" nz-input formControlName="password1"/>
-        </label>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item *ngIf="opts.operType=='edit'">
-      <nz-form-control  nzSpan="30">
-        <label>启动
-          <input type="checkbox" nz-input formControlName="active"/>
-        </label>
-      </nz-form-control>
-    </nz-form-item>
 
   </nz-spin>
 

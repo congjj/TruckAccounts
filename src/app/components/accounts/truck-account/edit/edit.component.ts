@@ -22,7 +22,8 @@ export class EditComponent implements OnInit
   submitting = false;
   subjectList: any[] = [{label: 'Lucy', value: 'lucy', age: 20},
     {label: 'Jack', value: 'jack', age: 22}];
-  selectedValue = {label: 'Jack', value: 'jack', age: 22};
+  subjectValue = {label: 'Jack', value: 'jack', age: 22};
+  customValue: any;
 
 
   constructor(private formBuilder: FormBuilder, private modal: NzModalRef, public router: Router, public  httpClient: HttpClient)
@@ -33,11 +34,12 @@ export class EditComponent implements OnInit
   {
     this.formGroup = this.formBuilder.group({
       accountDate: [new Date(), [Validators.required]],
-      name: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      password1: ['', [Validators.required]],
-      oldPassword: ['', [Validators.required]],
-      active: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      count: ['', [Validators.required]],
+      total: ['', [Validators.required]],
+      subjectValue: ['', [Validators.required]],
+      customValue:['', [Validators.required]],
+      remarkValue:['', [Validators.required]],
     });
   }
 
