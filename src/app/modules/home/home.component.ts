@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {NzMenuItemDirective, NzSubMenuComponent} from 'ng-zorro-antd';
-import {ElementSchemaRegistry} from '@angular/compiler';
 import {NavigationExtras, Router} from '@angular/router';
 import {GlobalConfig} from '../../services/global.config';
 

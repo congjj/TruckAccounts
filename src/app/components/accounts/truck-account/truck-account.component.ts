@@ -3,19 +3,19 @@ import {GlobalConfig} from '../../../services/global.config';
 import {filter, map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {NzModalService, NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder} from 'ng-zorro-antd';
-import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import {EditComponent} from './edit/edit.component';
 
 
-
-
 interface Columns {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
+  id: number;
+  accountDate: Date;
+  subjectName: number;
+  price: number;
+  count: number;
+  result: number;
+  customName: string;
+  remark:string;
 }
-
 
 
 @Component({
@@ -29,30 +29,10 @@ export class TruckAccountComponent implements OnInit
   trucks: any[] = [];
   truck: any;
   private loading = false;
-  listOfData: Columns[] = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    }
-  ];
-  //
+  listOfData: Columns[] = [];
   dateYearMonth: Date;
   dataLoading = false;
-
+  tabIndex:number = 0;
 
   constructor(public  httpClient: HttpClient, private modalService: NzModalService)
   {
@@ -69,8 +49,9 @@ export class TruckAccountComponent implements OnInit
   loadTrucks()
   {
     this.loading = true;
-    const url: string = GlobalConfig.url + 'truck/getTruckList';
-    this.httpClient.post(url, {}, GlobalConfig.HttpOptions).pipe(
+    const getTrucksUrl: string = GlobalConfig.url + 'truck/getTruckList';
+    const getAccountUrl:string =GlobalConfig.url + 'account/getAccountByCode';
+    this.httpClient.post(getTrucksUrl, {}, GlobalConfig.HttpOptions).pipe(
       filter((fdata: any) =>
       {
         return fdata.code == 200;
@@ -96,8 +77,33 @@ export class TruckAccountComponent implements OnInit
     ).subscribe((data: any) =>
     {
       this.trucks = data;
+      console.log(this.trucks);
       if (data.length>0)
-        this.truck=data[0];
+      {
+        this.truck=data[this.tabIndex];
+        let updateBody =
+          {
+            accountDate:this.dateYearMonth,
+            truckId:this.truck.id
+          };
+        this.httpClient.post(getAccountUrl, updateBody, GlobalConfig.HttpOptions).subscribe((accountData:any)=>{
+          console.log(accountData.data);
+          this.listOfData=[];
+          for (let i = 0; i < accountData.data.length; i++)
+          {
+            this.listOfData.push({
+              id: accountData.data[i].id,
+              accountDate: accountData.data[i].accountDate,
+              subjectName: accountData.data[i].subjectName,
+              price: accountData.data[i].price,
+              count: accountData.data[i].count,
+              result: accountData.data[i].result,
+              customName: accountData.data[i].customName,
+              remark: accountData.data[i].remark,
+            });
+          }
+        });
+      }
       this.loading = false;
     });
   }
@@ -118,9 +124,10 @@ export class TruckAccountComponent implements OnInit
 
   }
 
-  tabChaged(tab: any)
+  tabChaged(tab: any,index: number)
   {
-    console.log(tab);
+    this.tabIndex = index;
+    this.loadTrucks();
   }
 
   doAccount(date: Date)
@@ -152,12 +159,12 @@ export class TruckAccountComponent implements OnInit
     {
       if (rdata != undefined && rdata.type == 'ok')
       {
-        this.reloadTruckAccount();
+        this.reloadTruckAccount(this.truck,this.dateYearMonth);
       }
     });
   }
 
-  private reloadTruckAccount()
+  private reloadTruckAccount(truck:any, accountDate:Date )
   {
 
   }

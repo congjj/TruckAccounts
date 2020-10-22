@@ -31,7 +31,7 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="单价必须填写" nzHasFeedback nzSpan="20">
             <label>单价
-              <input type="text" nz-input formControlName="price"/>
+              <input #inputPriceElement type="text" nz-input formControlName="price"  (ngModelChange)="onPriceChange($event)" />
             </label>
           </nz-form-control>
         </nz-form-item>
@@ -40,7 +40,7 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="数量必须填写" nzHasFeedback nzSpan="20">
             <label>数量
-              <input type="text" nz-input formControlName="count"/>
+              <input #inputCountElement type="text" nz-input formControlName="count" (ngModelChange)="onCountChange($event)" />
             </label>
           </nz-form-control>
         </nz-form-item>
@@ -74,13 +74,18 @@
         </nz-form-item>
       </div>
     </div>
-
-
   </nz-spin>
+  <div>
 
-  <div class="modal-footer">
-    <button nz-button type="button" (click)="cancel()">关闭</button>
-    <button nz-button [nzLoading]="submitting" [nzType]="'primary'">保存</button>
+
+    <div class="modal-footer">
+      <div class="account-total">
+        <label>费用合计：{{totallMoney}} 元</label>
+      </div>
+      <button nz-button type="button" (click)="cancel()">关闭</button>
+      <button nz-button [nzLoading]="submitting" [nzType]="'primary'">保存</button>
+    </div>
+
   </div>
 </form>
 

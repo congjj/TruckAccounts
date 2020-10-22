@@ -1,6 +1,6 @@
 <div class="card-container">
   <nz-tabset  nzTabPosition="top" nzType="card" [nzTabBarExtraContent]="extraTemplate" >
-    <nz-tab *ngFor="let tab of trucks" [nzTitle]="tab.truckCode" (nzClick)="tabChaged(tab)">
+    <nz-tab *ngFor="let tab of trucks ; let i = index " [nzTitle]="tab.truckCode" (nzClick)="tabChaged(tab,i)">
       <nz-table #basicTable [nzData]="listOfData" [nzLoading]="dataLoading">
         <thead>
         <tr>
@@ -16,9 +16,13 @@
         </thead>
         <tbody>
         <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.name }}</td>
-          <td>{{ data.age }}</td>
-          <td>{{ data.address }}</td>
+          <td>{{ data.accountDate }}</td>
+          <td>{{ data.subjectName }}</td>
+          <td>{{ data.price }}</td>
+          <td>{{ data.count }}</td>
+          <td>{{ data.result }}</td>
+          <td>{{ data.customName }}</td>
+          <td>{{ data.remark }}</td>
           <td>
             <a nz-button nzSize="small" nzType="link">修改</a>
             <nz-divider nzType="vertical"></nz-divider>

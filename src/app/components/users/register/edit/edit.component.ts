@@ -59,16 +59,12 @@ export class EditComponent implements OnInit
 
     if (this.opts.operType=='add')
     {
-      console.log('add');
       this.addUser();
     }
     else
     {
       this.updateUser();
     }
-
-   // this.modal.close({type: 'ok'});
-    //this.modal.destroy(a);
   }
 
 
@@ -168,11 +164,9 @@ export class EditComponent implements OnInit
     });
   }
 
-
   cancel()
   {
     this.modal.destroy({type: 'cancel'});
   }
-
 
 }
