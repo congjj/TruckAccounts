@@ -132,7 +132,6 @@ export class TruckAccountComponent implements OnInit
 
   doAccount(date: Date)
   {
-    console.log(date);
     const modal = this.modalService.create({
       nzTitle: this.truck.truckCode + '【记账】', // 窗体标题
       nzContent: EditComponent, // 表单组件

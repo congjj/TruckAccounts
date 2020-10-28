@@ -1,8 +1,10 @@
 import {Component, OnInit, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {NzModalRef} from 'ng-zorro-antd';
-import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {Params, Router} from '@angular/router';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {GlobalConfig} from '../../../../services/global.config';
+import {filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit',
@@ -21,10 +23,12 @@ export class EditComponent implements OnInit
   value: any;
   formGroup: any;
   submitting = false;
-  subjectList: any[] = [{label: 'Lucy', value: 'lucy', age: 20},
-    {label: 'Jack', value: 'jack', age: 22}];
-  subjectValue = {label: 'Jack', value: 'jack', age: 22};
+  subjectList: any[] = [];
+    // [{label: 'Lucy', value: 'lucy', age: 20},
+    // {label: 'Jack', value: 'jack', age: 22}];
+  subjectValue :any;//{label: 'Jack', value: 'jack', age: 22};
   customValue: any;
+  customList:any[]=[];
   totallMoney: number;
   price: number;
   count: number;
@@ -35,10 +39,25 @@ export class EditComponent implements OnInit
 
   ngOnInit(): void
   {
+    console.log(this.opts);
+    if (this.opts.operType=='add')
+    {
+      this.loadAdd();
+    }
+    else if (this.opts.operType=='edit')
+    {
+
+    }
+
+
+  }
+
+  loadAdd()
+  {
     this.formGroup = this.formBuilder.group({
       accountDate: [new Date(), [Validators.required]],
-      price: [1, [Validators.required]],
-      count: [0, [Validators.required]],
+      price: [0, [Validators.required]],
+      count: [1, [Validators.required]],
       total: ['', [Validators.required]],
       subjectValue: ['', [Validators.required]],
       customValue: ['', [Validators.required]],
@@ -47,7 +66,23 @@ export class EditComponent implements OnInit
     this.price = this.formGroup.value.price;
     this.count = this.formGroup.value.count;
     this.totallMoney = this.price * this.count;
+
+    const getSubjectUrl:string =GlobalConfig.url + 'subjects/getSubjectByUserAndTruckId';
+    const param:Params = {userId:GlobalConfig.loginInfo.id,truckId:this.opts.args['truck'].id};
+    this.httpClient.get(getSubjectUrl,GlobalConfig.getHttpOptions(param))
+      .pipe(
+        filter((fdata:any)=>{
+          return  fdata.code == 200;
+        }),
+        map((fdata:any)=>{
+          return fdata.data;
+        })
+      )
+      .subscribe(data=>{
+        this.subjectList = data;
+    });
   }
+
 
   submit()
   {
@@ -58,6 +93,12 @@ export class EditComponent implements OnInit
   {
 
   }
+
+  customChange(e: any)
+  {
+
+  }
+
 
   onPriceChange(e: any)
   {
@@ -85,7 +126,8 @@ export class EditComponent implements OnInit
 
   cancel()
   {
-
+    this.modal.destroy({type: 'cancel'});
   }
+
 
 }

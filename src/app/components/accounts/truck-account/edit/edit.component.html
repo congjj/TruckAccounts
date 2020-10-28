@@ -18,7 +18,7 @@
               <nz-select nzShowSearch formControlName="subjectValue" [(ngModel)]="subjectValue"
                          (ngModelChange)="subjectChange($event)" nzAllowClear
                          nzPlaceHolder="选择发生费用">
-                <nz-option *ngFor="let option of subjectList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+                <nz-option *ngFor="let option of subjectList" [nzValue]="option" [nzLabel]="option.name"></nz-option>
               </nz-select>
             </label>
           </nz-form-control>
@@ -51,11 +51,11 @@
       <div nz-col nzSpan="24">
         <nz-form-item>
           <nz-form-control nzHasFeedback nzSpan="20">
-            <label>费用项目
+            <label>客户信息
               <nz-select nzShowSearch formControlName="customValue" [(ngModel)]="customValue"
-                         (ngModelChange)="subjectChange($event)" nzAllowClear
+                         (ngModelChange)="customChange($event)" nzAllowClear
                          nzPlaceHolder="选择客户">
-                <nz-option *ngFor="let option of subjectList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+                <nz-option *ngFor="let option of customList" [nzValue]="option" [nzLabel]="option.name"></nz-option>
               </nz-select>
             </label>
           </nz-form-control>
