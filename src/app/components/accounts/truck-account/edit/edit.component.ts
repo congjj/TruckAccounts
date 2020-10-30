@@ -24,8 +24,6 @@ export class EditComponent implements OnInit
   formGroup: any;
   submitting = false;
   subjectList: any[] = [];
-    // [{label: 'Lucy', value: 'lucy', age: 20},
-    // {label: 'Jack', value: 'jack', age: 22}];
   subjectValue :any;//{label: 'Jack', value: 'jack', age: 22};
   customValue: any;
   customList:any[]=[];
@@ -48,8 +46,6 @@ export class EditComponent implements OnInit
     {
 
     }
-
-
   }
 
   loadAdd()
@@ -81,6 +77,20 @@ export class EditComponent implements OnInit
       .subscribe(data=>{
         this.subjectList = data;
     });
+
+    const getCustomUrl:string =GlobalConfig.url + 'custom/getCustomByUserId';
+    this.httpClient.post(getCustomUrl, GlobalConfig.loginInfo.id, GlobalConfig.HttpOptions)
+      .pipe(
+        filter((fdata:any)=>{
+          return  fdata.code == 200;
+        }),
+        map((fdata:any)=>{
+          return fdata.data;
+        })
+      )
+      .subscribe(data=>{
+        this.customList = data;
+      });
   }
 
 
