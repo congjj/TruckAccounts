@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit
 
   validateForm: FormGroup;
   loading =false;
-
+  gurl:string;
   constructor(private fb: FormBuilder, public router: Router, public  httpClient: HttpClient)
   {
   }
@@ -26,11 +26,12 @@ export class LoginComponent implements OnInit
       password: [null, [Validators.required]],
       remember: [true]
     });
-
+   this.gurl =GlobalConfig.url;
   }
 
   submitForm(): void
   {
+    console.log('登陆');
     this.loading = true;
     for (const i in this.validateForm.controls)
     {
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit
     }
 
     const url: string = GlobalConfig.url + 'user/userLogin';
+    console.log(url);
     let bodys =parm.queryParams;
     this.httpClient.post(url, bodys, GlobalConfig.HttpOptions).subscribe((data: any) =>
     {
@@ -62,7 +64,7 @@ export class LoginComponent implements OnInit
         GlobalConfig.loginInfo.id=  data.data.id;
         GlobalConfig.loginInfo.username=data.data.name;
         GlobalConfig.loginInfo.password=data.data.password;
-        this.router.navigate(['/account']);
+        this.router.navigate(['/account'])
       } else
       {
         alert(data.msg);

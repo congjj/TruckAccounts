@@ -1,9 +1,13 @@
-import {HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 export class GlobalConfig
 {
-  static url = 'http://localhost:9091/';
+  static url = '';
   static HttpOptions ={headers: new HttpHeaders({'Content-Type': 'application/json'})};
+
+  constructor(private http: HttpClient) {}
+
+
 
   static getHttpOptions(param:any)
   {
@@ -19,3 +23,5 @@ export class GlobalConfig
     password:null
   };
 }
+
+

@@ -17,14 +17,14 @@ export class EditComponent implements OnInit
   @ViewChild('inputPriceElement', { static: false }) inputPriceElement?: ElementRef;
   loading = false;
   opts: {
-    operType: 'add' | 'edit'; // 'add' 'edit'
+    operType: 'add' | 'edit' ; // 'add' 'edit'
     args: {}
   };
   value: any;
   formGroup: any;
   submitting = false;
   subjectList: any[] = [];
-  subjectValue :any;//{label: 'Jack', value: 'jack', age: 22};
+  subjectValue :any;
   customValue: any;
   customList:any[]=[];
   totallMoney: number;
@@ -96,8 +96,52 @@ export class EditComponent implements OnInit
 
   submit()
   {
+    if (this.opts.operType=='add')
+    {
+      this.addAccount ();
+    }
+    else if (this.opts.operType=='edit')
+    {
 
+    }
+    console.log(this.formGroup);
   }
+
+  addAccount()
+  {
+    const insertAccountUrl:string =GlobalConfig.url + 'account/insertAccount';
+    let bodys = {
+      accountDate: "string",
+      accountDate1: "string",
+      active: 0,
+      count: 0,
+      customId: 0,
+      customName: "string",
+      id: 0,
+      modifyTime: "string",
+      price: 0,
+      remark: "string",
+      result: 0,
+      subjectId: 0,
+      subjectName: "string",
+      truckId: 0
+    };
+    this.httpClient.post(insertAccountUrl, bodys, GlobalConfig.HttpOptions)
+      .pipe(
+        filter((fdata:any)=>{
+          return  fdata.code == 200;
+        }),
+        map((fdata:any)=>{
+          return fdata.data;
+        })
+      )
+      .subscribe(data=>{
+        this.customList = data;
+      });
+  }
+
+
+
 
   subjectChange(e: any)
   {
@@ -121,7 +165,6 @@ export class EditComponent implements OnInit
     this.inputPriceElement!.nativeElement.value = this.price;
   }
 
-
   onCountChange(e: any)
   {
     const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
@@ -133,11 +176,9 @@ export class EditComponent implements OnInit
     this.inputCountElement!.nativeElement.value = this.count;
   }
 
-
   cancel()
   {
     this.modal.destroy({type: 'cancel'});
   }
-
 
 }
